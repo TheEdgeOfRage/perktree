@@ -53,9 +53,20 @@ const router = new Router({
 			component: () => import(/* webpackChunkName: "admin" */ './components/auth/admin-panel.component'),
 		},
 		{
-			path: '/perks',
+			path: '/trees',
+			name: 'trees',
+			component: () => import(/* webpackChunkName: "perks" */ './components/trees.component'),
+			meta: {
+				guest: true,
+			},
+		},
+		{
+			path: '/perks/:tree',
 			name: 'perks',
 			component: () => import(/* webpackChunkName: "perks" */ './components/perks.component'),
+			meta: {
+				guest: true,
+			},
 		},
 	],
 });
@@ -65,16 +76,12 @@ router.isCurrentRoute = (routeName) => {
 };
 
 router.beforeEach((to, from, next) => {
-	if (to.meta.guest && AuthController.checkAuthStatus()) {
-		return next(to.meta.guest_redirect || '/');
-	}
-
-	if (!to.meta.guest && !AuthController.checkAuthStatus()) {
+	if (to.name === 'logout') {
+		AuthController.logout();
 		return next({ name: 'login' });
 	}
 
-	if (to.name === 'logout' && AuthController.checkAuthStatus()) {
-		AuthController.logout();
+	if (!to.meta.guest && !AuthController.getAuthStatus()) {
 		return next({ name: 'login' });
 	}
 

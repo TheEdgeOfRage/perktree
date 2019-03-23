@@ -1,7 +1,7 @@
 <template>
-	<v-content>
-		arst
-	</v-content>
+	<v-container>
+		<h1>Welcome to Perktree</h1>
+	</v-container>
 </template>
 
 <script>

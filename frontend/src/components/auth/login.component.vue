@@ -51,11 +51,8 @@ export default {
 
 			AuthController.login(data).then(() => {
 				this.$router.push({ name: 'index' });
-				this.$store.dispatch('fetchFormData');
 			}).catch((error) => {
-				if (error.response.status === 401) {
-					this.loginErrors.push(error.response.data);
-				}
+				this.loginErrors.push(error.response.data);
 			});
 		},
 	},

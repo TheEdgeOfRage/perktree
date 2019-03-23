@@ -53,7 +53,7 @@ Bewildering koan	As a bonus action you can make charisma check vs wisdom save ag
 Criminal reputation	Add profficiency bonus on any skill checks when interacting with criminals. If already profficient with skill, double profficience bonus.	Charisma	3	Cosmopolitan
 Free Spirit	You can gain advantage on any roll to resist mind-affecting effects or to escape grapple and any bonds. *short rest	Charisma	3	Steadfast Personality
 Guided Hand	You can add your charisma modifier to an attack and damage roll. *short rest	Charisma	3	Greater Ability focus (Charisma)
-Inspiring Talent	If copying someones actions that require skill checks, if that creature has profficiency in that skill and you don't, your skill check counts as being profficient.	Charisma	3	Greater Ability focus (Charisma)	Half elf
+Inspiring Talent	If copying someones actions that require skill checks, if that creature has profficiency in that skill and you don't, your skill check counts as being profficient.	Charisma	3	Greater Ability focus (Charisma)	Half-Elf
 Intoxicating Flattery	Take 1 minute to flatter someone, after that roll charisma vs insight. If succesful, target gets disadvantage on all wisdom based rolls for 10 x your cha mod minutes.	Charisma	3	Greater Ability focus (Charisma)
 Monstrous Mask	When using intimidate against a humanoid, if your intimidate skill check beats the opposing skill check by 10 or more, target creature is frightened by you.	Charisma	3	Greater Ability focus (Charisma)	Tiefling
 Strong Comeback	Whenever you are allowed to reroll an ability check, a skill check, or a saving throw, you gain a +2 bonus on the reroll.	Charisma	3	Greater Ability focus (Charisma)
@@ -74,7 +74,7 @@ Drunkard’s Recovery	If you are dying and a creature gives you at least a sip o
 Fast Healer	When you regain hit points by resting or through magical healing, you recover additional hit points equal to half your Constitution modifier (minimum +1).	Constitution	4	Endurance
 Heroic Recovery	After concetrating for 10 minute you can remove half points of exaustion rounded up. When you use Heroic Defiance, you can spend the use of this ability to instead of ignoring one harmful condition for one round, you can remove it totally. *long rest 	Constitution	4	Heroic Defiance
 Improved Stalwart	If you haven't moved this turn, you get the effect of dodge action. You can not use this ability if you already took a dodge action.	Constitution	4	Stalwart
-Ironhide	Gain +1 AC.	Constitution	4	Greater Ability focus (Constitution)	Half-ork, dwarf
+Ironhide	Gain +1 AC.	Constitution	4	Greater Ability focus (Constitution)	Half-Orc, Dwarf
 Raging Brutality	When using two handed weapons while raging, you can add your constitution modifier in addition to strength modifier to damage rolls.	Constitution	4	Greater Ability focus (Constitution)	Barbarian
 Survivor	You gain advantage bonus on all Constitution checks made to stabilize while dying. Once per day, if you are struck by a critical hit or sneak attack, you can spend a reaction to negate the critical or the sneak attack damage, making the attack a normal hit. Replenishes after long rest.	Constitution	4	Fight On
 Uncanny Concentration	Gain advantages on concentration rolls in any kind of situation.	Constitution	4	Combat Casting
@@ -87,7 +87,7 @@ Second skin	When false-faceing gain passive deception, 8+deception bonus. If som
 Willing Accomplice	Ally that is attempting Deception checks to disguise themself as another creature have advantage if in 15 ft from you. Can't use this ablity if deafened or blind.	Deception	3	Greater Skill focus (Deception)
 Improved conceal spell	Creatures no longer gain bonus to their passive perception equal to spell level. If the creature is 30ft or more from you, gain advantage on deception or sleight of hand.	Deception	4	Conceal spell
 Kinslayer	Deal 1d6 bonus damage per attack when attacking  creatures that have the same creature type (and subtype, if applicable) as you. 	Deception	4	Greater Skill focus (Deception)
-Pass For Human	Gain advantages when making a deception skill check to disguise yourself as a human. 	Deception	4	Second skin	Half elf, half orc
+Pass For Human	Gain advantages when making a deception skill check to disguise yourself as a human. 	Deception	4	Second skin	Half-Elf, Half-Orc
 Sycophant	As a standard action, you can attempt to force an enemy to show you mercy by succeeding at a Deception check (DC = 12 + the target’s Wisdom saving throw bonus). If you succeed, your target’s next successful attack against you that brings you to 0 hp will knock you out instead of killing you.	Deception	4	Helpless Prisoner
 Fool Magic	When you are in disguise as a member of a particular race or a person of a particular alignment, you can use your Deception bonus instead of your Arcana bonus to emulate that race and alignment for the purpose of attempting to activate a magic item.	Deception - Arcana	4	Second skin	Skill focus (Arcana)
 Taunt	You can demoralize opponents using Deception rather than Intimidate and take no skill check penalty for being smaller than your target.	Deception - Intimidation	3	Skill focus (Deception)	Demoralize
@@ -163,7 +163,7 @@ Animal call	You can use your deception skill to mimic the calls of animals t
 Eagle-eyed	You can see to a considerable distance without penalty. Ignore disadvantage to perception due to distance.	Perception	2	Skill focus (Perception)
 Alertness	Gain advantages on saving throws against sleep and charm effects for a number of times equal to your. Wisdom modifier. *long rest	Perception	2	Skill focus (Perception)
 Eyes of Judgment	You may spend 3 rounds studying a creature within 60 feet. You cannot take any other actions while doing this. Effect: you learn the alignment of the creature.	Perception	3	Eagle-eyed
-Keen Scent	You can scent creatures by their smell. You don't need to see someone in 30ft to sense them with perception check. 	Perception	3	Greater Skill focus (Perception)	Half orc
+Keen Scent	You can scent creatures by their smell. You don't need to see someone in 30ft to sense them with perception check. 	Perception	3	Greater Skill focus (Perception)	Half-Orc
 Sentry	You can roll a perception check and count it as your passive perception for minutes equal to your level. *short rest	Perception	3	Greater Skill focus (Perception)
 Uncanny Alertness	In addition to your wisdom modifier, add your Dexterity modifier to your perception.	Perception	3	Alertness
 Judgement of weakness	When using eyes of judgement, in addition to knowing creatures allignment, you know it's weaknesses and resistances.	Perception	4	Eyes of Judgment

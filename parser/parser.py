@@ -10,12 +10,16 @@
 import argparse
 import csv
 import json
+import os
 import re
 
-CLASS_LIST = ['Artificer', 'Barbarian', 'Bard', 'Cleric', 'Druid', 'Fighter', 'Monk', 'Mystic', 'Paladin', 'Ranger', 'Rogue', 'Sorcerer', 'Warlock', 'Wizard', 'Mage', 'Alchemist']
-RACE_LIST = ['Dwarf', 'Elf', 'Halfling', 'Human', 'Dragonborn', 'Gnome', 'Half-elf', 'Half-orc', 'Tiefling']
 
-ability_pattern = re.compile(r'Strength|Dexterity|Constitution|Intelligence|Wisdom|Charisma \d+\+')
+OUTPUT_DIR = f'{os.path.abspath(os.path.dirname(__file__))}/../static/perks'
+INPUT_FILE = f'{os.path.abspath(os.path.dirname(__file__))}/perks_all.tsv'
+
+ability_pattern = re.compile(r'Strength|Dexterity|Constitution|Intelligence|Wisdom|Charisma \d+\+', re.IGNORECASE)
+class_pattern = re.compile(r'((Artificer|Barbarian|Bard|Cleric|Druid|Fighter|Monk|Mystic|Paladin|Ranger|Rogue|Sorcerer|Warlock|Wizard|Mage|Alchemist|Magus)(, )?)+', re.IGNORECASE)
+race_pattern = re.compile(r'((Dwarf|Elf|Halfling|Human|Dragonborn|Gnome|Half-Elf|Half-Orc|Tiefling)(, )?)+', re.IGNORECASE)
 
 
 def load_csv(filename):
@@ -35,6 +39,8 @@ def input_transform(perks):
 		perk.pop('tree')
 		perk['level'] = int(perk['level'])
 		perk['colour'] = 0
+		perk['name'] = perk['name'].strip()
+		perk['effect'] = perk['effect'].strip()
 		if tree not in trees:
 			trees[tree] = {
 				'nodes': [],
@@ -96,9 +102,9 @@ def create_links(trees):
 					if found:
 						break
 				else:
-					if requirement in CLASS_LIST:
+					if re.match(class_pattern, requirement):
 						new_perk = create_perk(requirement, '', level=0, colour=1)
-					elif requirement in RACE_LIST:
+					elif re.match(race_pattern, requirement):
 						new_perk = create_perk(requirement, '', level=0, colour=2)
 					elif re.match(ability_pattern, requirement):
 						new_perk = create_perk(requirement, '', level=0, colour=3)
@@ -122,14 +128,15 @@ def output_transform(trees):
 
 
 def write_json(trees, split):
+	os.makedirs(OUTPUT_DIR, exist_ok=True)
 	for tree, data in trees.items():
-		with open(f'perks/{tree}.json', 'w') as jsonfile:
+		with open(f'{OUTPUT_DIR}/{tree}.json', 'w') as jsonfile:
 			json.dump(data, jsonfile)
 
 
 def main():
 	parser = argparse.ArgumentParser(description='Parse tsv perk tree')
-	parser.add_argument('input_file', nargs='?', default='perks_all.tsv', help='path to the input file')
+	parser.add_argument('input_file', nargs='?', default=INPUT_FILE, help='path to the input file')
 	parser.add_argument('-s', '--split', action='store_true', help='split output into multiple json files by tree')
 	args = parser.parse_args()
 

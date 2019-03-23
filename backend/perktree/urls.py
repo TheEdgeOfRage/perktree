@@ -22,14 +22,13 @@ from rest_framework_simplejwt.views import (
 	TokenVerifyView,
 )
 
-# Wire up our API using automatic URL routing.
-# Additionally, we include login URLs for the browsable API.
 urlpatterns = [
 	path('api/', include([
 		path('admin/', admin.site.urls),
 		path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
 		path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 		path('token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+		path('', include('perks.urls'))
 	]))
 ]
 
