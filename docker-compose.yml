@@ -1,0 +1,40 @@
+version: "3"
+services:
+  db:
+    image: mariadb
+    container_name: perktree-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: perktree-root-password
+      MYSQL_DATABASE: perktree
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile-frontend
+    container_name: perktree-frontend
+    restart: unless-stopped
+    ports:
+      - 8019:80
+    links:
+      - backend
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile-backend
+    container_name: perktree-backend
+    restart: unless-stopped
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
+      DJANGO_ENV: prod
+      APP_HOST: perktree.theedgeofrage.com
+      DB_ENGINE: django.db.backends.mysql
+      DB_NAME: perktree
+      DB_USER: root
+      DB_PASSWORD: perktree-root-password
+      DB_HOST: db
+      DB_PORT: 3306
+    links:
+      - db
+

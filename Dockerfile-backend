@@ -1,0 +1,21 @@
+# vim: set ft=dockerfile :
+FROM python:3.7-alpine
+
+COPY backend /app
+WORKDIR /app
+EXPOSE 80
+
+RUN set -ex \
+	&& apk add --no-cache --virtual .build-deps \
+		gcc \
+		make \
+		libc-dev \
+		musl-dev \
+		libffi-dev \
+	&& pip install --no-cache-dir pipenv \
+	&& pipenv install --system --clear \
+	&& apk del .build-deps \
+	&& rm db.sqlite3
+
+CMD ["./entrypoint.sh"]
+
