@@ -8,7 +8,7 @@ services:
       MYSQL_ROOT_PASSWORD: perktree-root-password
       MYSQL_DATABASE: perktree
     volumes:
-      - ./storage/db:/var/lib/mysql
+      - /mnt/perktree/db:/var/lib/mysql
 
   frontend:
     build:
