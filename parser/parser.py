@@ -14,7 +14,11 @@ import os
 import re
 
 
-OUTPUT_DIR = f'{os.path.abspath(os.path.dirname(__file__))}/../static/perks'
+PERKS_DIR = os.environ.get('PERKS_DIR')
+
+if not PERKS_DIR:
+	PERKS_DIR = '../static/perks'
+
 INPUT_FILE = f'{os.path.abspath(os.path.dirname(__file__))}/perks_all.tsv'
 
 ability_pattern = re.compile(r'Strength|Dexterity|Constitution|Intelligence|Wisdom|Charisma \d+\+', re.IGNORECASE)
@@ -128,9 +132,9 @@ def output_transform(trees):
 
 
 def write_json(trees, split):
-	os.makedirs(OUTPUT_DIR, exist_ok=True)
+	os.makedirs(PERKS_DIR, exist_ok=True)
 	for tree, data in trees.items():
-		with open(f'{OUTPUT_DIR}/{tree}.json', 'w') as jsonfile:
+		with open(f'{PERKS_DIR}/{tree}.json', 'w') as jsonfile:
 			json.dump(data, jsonfile)
 
 

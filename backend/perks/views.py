@@ -1,4 +1,5 @@
 import json
+import os
 
 from os import listdir
 from os.path import isfile, join
@@ -7,7 +8,10 @@ from rest_framework.response import Response
 from rest_framework import authentication, permissions
 
 
-PERKS_DIR = '../static/perks'
+PERKS_DIR = os.environ.get('PERKS_DIR')
+
+if not PERKS_DIR:
+	PERKS_DIR = '../static/perks'
 
 
 def get_tree_list():

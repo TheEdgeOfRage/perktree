@@ -7,6 +7,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: perktree-root-password
       MYSQL_DATABASE: perktree
+    volumes:
+      ./storage/db:/var/lib/mysql
 
   frontend:
     build:
@@ -35,6 +37,7 @@ services:
       DB_PASSWORD: perktree-root-password
       DB_HOST: db
       DB_PORT: 3306
+      PERKS_DIR: /app/static/perks
     links:
       - db
 
