@@ -18,7 +18,7 @@ RUN set -ex \
 	&& pip install --no-cache-dir pipenv \
 	&& pipenv install --system --clear \
 	&& apk del .build-deps \
-	&& rm db.sqlite3
+	&& rm -f db.sqlite3
 
 CMD ["./entrypoint.sh"]
 
