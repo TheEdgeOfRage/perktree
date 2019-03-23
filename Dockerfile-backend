@@ -1,5 +1,5 @@
 # vim: set ft=dockerfile :
-FROM python:3.7-alpine
+FROM python:3-alpine
 
 COPY backend /app
 COPY parser /app/parser
