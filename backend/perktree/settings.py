@@ -12,18 +12,21 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 
+ENV = os.environ.get('DJANGO_ENV')
+if not ENV:
+	ENV = 'dev'
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '^j_x7a7u_#9ruh3p^h=*my_k+asoqob&xq@5n^2n2f(7$#dk(#' if os.environ.get('DJANGO_ENV') == 'dev' else os.environ.get('SECRET_KEY')
+SECRET_KEY = '^j_x7a7u_#9ruh3p^h=*my_k+asoqob&xq@5n^2n2f(7$#dk(#' if ENV == 'dev' else os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_ENV') == 'dev'
+DEBUG = ENV == 'dev'
 
 ALLOWED_HOSTS = [
 	'perktree.localhost',
@@ -79,7 +82,7 @@ WSGI_APPLICATION = 'perktree.wsgi.application'
 DATABASES = {
 	'default': {
 		'ENGINE': os.environ.get('DB_ENGINE', ''),
-		'NAME': os.path.join(BASE_DIR, os.environ.get('DB_NAME', '')) if os.environ.get('DJANGO_ENV') == 'dev' else os.environ.get('DB_NAME', ''),
+		'NAME': os.path.join(BASE_DIR, os.environ.get('DB_NAME', '')) if ENV == 'dev' else os.environ.get('DB_NAME', ''),
 		'USER': os.environ.get('DB_USER', ''),
 		'PASSWORD': os.environ.get('DB_PASSWORD', ''),
 		'HOST': os.environ.get('DB_HOST', ''),

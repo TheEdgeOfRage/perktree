@@ -17,7 +17,7 @@ import re
 PERKS_DIR = os.environ.get('PERKS_DIR')
 
 if not PERKS_DIR:
-	PERKS_DIR = '../static/perks'
+	PERKS_DIR = 'static/perks'
 
 INPUT_FILE = f'{os.path.abspath(os.path.dirname(__file__))}/perks_all.tsv'
 
@@ -26,8 +26,15 @@ class_pattern = re.compile(r'((Artificer|Barbarian|Bard|Cleric|Druid|Fighter|Mon
 race_pattern = re.compile(r'((Dwarf|Elf|Halfling|Human|Dragonborn|Gnome|Half-Elf|Half-Orc|Tiefling)(, )?)+', re.IGNORECASE)
 
 
+def strip_whitespaces(filename):
+	with open(filename, 'r') as file:
+		new = [line.rstrip() for line in file]
+	with open(filename, 'w') as file:
+		[file.write(f'{line}\n') for line in new]
+
+
 def load_csv(filename):
-	with open(filename, newline='') as csvfile:
+	with open(filename, 'r', newline='') as csvfile:
 		perkreader = csv.DictReader(csvfile, delimiter='\t', restkey='requirements')
 		perks = []
 		for row in perkreader:
@@ -45,6 +52,10 @@ def input_transform(perks):
 		perk['colour'] = 0
 		perk['name'] = perk['name'].strip()
 		perk['effect'] = perk['effect'].strip()
+		if 'requirements' in perk:
+			for i in range(len(perk['requirements'])):
+				perk['requirements'][i] = perk['requirements'][i].strip()
+
 		if tree not in trees:
 			trees[tree] = {
 				'nodes': [],
@@ -57,12 +68,14 @@ def input_transform(perks):
 
 
 def create_perk(name, effect, level=1, colour=4):
-	return {
+	new_perk = {
 		'name': name,
 		'effect': effect,
 		'level': level,
 		'colour': colour,
 	}
+
+	return new_perk
 
 
 def create_links(trees):
@@ -76,7 +89,7 @@ def create_links(trees):
 				found = False
 				for j in range(len(data['nodes'])):
 					lookup_perk = data['nodes'][j]
-					if lookup_perk['name'] in requirement:
+					if requirement.startswith(lookup_perk['name']):
 						data['links'].append({
 							'source': j,
 							'target': i,
@@ -90,7 +103,7 @@ def create_links(trees):
 
 				for lookup_tree, lookup_data in trees.items():
 					for lookup_perk in lookup_data['nodes']:
-						if lookup_perk['name'] in requirement:
+						if requirement.startswith(lookup_perk['name']):
 							new_perk = create_perk(requirement, lookup_perk['effect'], lookup_perk['level'], lookup_perk['colour'])
 							data['nodes'].append(new_perk)
 							link_source = len(data['nodes']) - 1
@@ -144,6 +157,7 @@ def main():
 	parser.add_argument('-s', '--split', action='store_true', help='split output into multiple json files by tree')
 	args = parser.parse_args()
 
+	strip_whitespaces(args.input_file)
 	perks = load_csv(args.input_file)
 	trees = input_transform(perks)
 	create_links(trees)
