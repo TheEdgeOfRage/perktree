@@ -49,7 +49,7 @@ class PerkParser():
 
 	def parse_perks(self):
 		for p in self.perks:
-			perk = self.create_perk(name=p['name'].strip(), effect=p['effect'].strip(), level=int(p['level']), type=0)
+			perk = self.create_perk(name=p['name'].strip(), effect=p['effect'].strip(), level=int(p['level']), perk_type=0)
 			for tree_name in p['tree'].split(','):
 				try:
 					tree = Tree.objects.get(name=tree_name)
@@ -59,8 +59,8 @@ class PerkParser():
 
 			p['id'] = Perk.objects.latest('id').id
 
-	def create_perk(self, name, effect='', level=1, type=4, trees=None):
-		new_perk = Perk(name=name, effect=effect, level=level, type=type)
+	def create_perk(self, name, effect='', level=1, perk_type=4, trees=None):
+		new_perk = Perk(name=name, effect=effect, level=level, type=perk_type)
 		new_perk.save()
 		if trees is not None:
 			new_perk.trees.add(*trees)
@@ -85,11 +85,11 @@ class PerkParser():
 
 				except Perk.DoesNotExist:
 					if re.match(class_pattern, req_name):
-						req = self.create_perk(name=req_name, level=0, type=1)
+						req = self.create_perk(name=req_name, level=0, perk_type=1)
 					elif re.match(race_pattern, req_name):
-						req = self.create_perk(name=req_name, level=0, type=2)
+						req = self.create_perk(name=req_name, level=0, perk_type=2)
 					elif re.match(ability_pattern, req_name):
-						req = self.create_perk(name=req_name, level=0, type=3)
+						req = self.create_perk(name=req_name, level=0, perk_type=3)
 					elif 'Skill Focus' in req_name or 'Ability Focus' in req_name:
 						req_match = re.match(requirement_pattern, req_name)
 						req_tree = Tree.objects.get(name=req_match.group(2))
@@ -97,9 +97,9 @@ class PerkParser():
 						req_base_name = req_match.group(1)
 						base_req = Perk.objects.get(name=req_base_name)
 
-						req = self.create_perk(name=req_name, effect=base_req.effect, level=base_req.level, type=base_req.type, trees=[req_tree])
+						req = self.create_perk(name=req_name, effect=base_req.effect, level=base_req.level, perk_type=base_req.type, trees=[req_tree])
 					else:
-						req = self.create_perk(name=req_name, level=0, type=4)
+						req = self.create_perk(name=req_name, level=0, perk_type=4)
 				perk.parents.add(req)
 
 	def output_transform(self):

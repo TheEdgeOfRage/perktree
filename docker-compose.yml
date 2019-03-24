@@ -1,14 +1,15 @@
 version: "3"
 services:
   db:
-    image: mariadb
+    image: postgres:alpine
     container_name: perktree-db
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_DATABASE: perktree
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: perktree
     volumes:
-      - /mnt/perktree/db:/var/lib/mysql
+      - /mnt/perktree/db:/var/lib/postgresql/data
 
   frontend:
     build:
@@ -35,12 +36,12 @@ services:
       DJANGO_ADMIN_MAIL: ${DJANGO_ADMIN_MAIL}
       DJANGO_ADMIN_PASS: ${DJANGO_ADMIN_PASS}
       APP_HOST: perktree.theedgeofrage.com
-      DB_ENGINE: django.db.backends.mysql
+      DB_ENGINE: django.db.backends.postgresql
       DB_NAME: perktree
       DB_USER: root
       DB_PASSWORD: ${DB_PASSWORD}
       DB_HOST: db
-      DB_PORT: 3306
+      DB_PORT: 5432
       PERKS_DIR: /app/static/perks
     links:
       - db

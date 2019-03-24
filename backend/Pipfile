@@ -11,7 +11,7 @@ djangorestframework = "*"
 markdown = "*"
 djangorestframework-simplejwt = "*"
 gunicorn = "*"
-mysqlclient = "*"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.7"

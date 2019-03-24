@@ -10,7 +10,7 @@ from django.db import models
 
 
 class Tree(models.Model):
-	name = models.CharField(max_length=32, unique=True)
+	name = models.CharField(max_length=64, unique=True)
 
 	def __str__(self):
 		return self.name
@@ -20,7 +20,7 @@ class Tree(models.Model):
 
 
 class Perk(models.Model):
-	name = models.CharField(max_length=32)
+	name = models.CharField(max_length=64)
 	effect = models.TextField()
 	level = models.IntegerField()
 	type = models.IntegerField()

@@ -82,8 +82,9 @@ WSGI_APPLICATION = 'perktree.wsgi.application'
 DATABASES = {
 	'default': {
 		'ENGINE': os.environ.get('DB_ENGINE', 'django.db.backends.sqlite3'),
-		'NAME': os.path.join(BASE_DIR, os.environ.get('DB_NAME', 'db.sqlite3')) if ENV == 'dev' else os.environ.get('DB_NAME', ''),
-		'USER': os.environ.get('DB_USER', ''),
+		#  'NAME': os.path.join(BASE_DIR, os.environ.get('DB_NAME', 'db.sqlite3')) if ENV == 'dev' else os.environ.get('DB_NAME', ''),
+		'NAME': os.environ.get('DB_NAME', 'perktree'),
+		'USER': os.environ.get('DB_USER', 'root'),
 		'PASSWORD': os.environ.get('DB_PASSWORD', ''),
 		'HOST': os.environ.get('DB_HOST', ''),
 		'PORT': os.environ.get('DB_PORT', ''),
