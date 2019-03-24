@@ -39,7 +39,7 @@ import * as _ from 'lodash';
 import PerksController from '../controllers/perks.controller';
 
 export default {
-	name: 'Perks',
+	name: 'perks',
 	components: {
 	},
 	data () {
@@ -59,7 +59,7 @@ export default {
 	methods: {
 		renderGraph(graphData) {
 			const svg = d3.select('#perktree').append('svg');
-			const chart = new Sankey(svg);
+			const chart = new Sankey.Path(svg);
 			const nodes = graphData.nodes;
 
 			chart.nodeWidth(24)
