@@ -30,11 +30,14 @@ services:
     environment:
       SECRET_KEY: ${SECRET_KEY}
       DJANGO_ENV: prod
+      DJANGO_ADMIN_USER: ${DJANGO_ADMIN_USER}
+      DJANGO_ADMIN_MAIL: ${DJANGO_ADMIN_MAIL}
+      DJANGO_ADMIN_PASS: ${DJANGO_ADMIN_PASS}
       APP_HOST: perktree.theedgeofrage.com
       DB_ENGINE: django.db.backends.mysql
       DB_NAME: perktree
       DB_USER: root
-      DB_PASSWORD: perktree-root-password
+      DB_PASSWORD: ${DB_PASSWORD}
       DB_HOST: db
       DB_PORT: 3306
       PERKS_DIR: /app/static/perks
