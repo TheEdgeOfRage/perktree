@@ -12,8 +12,8 @@ RUN set -ex \
 		libc-dev \
 		musl-dev \
 		libffi-dev \
-		mariadb-dev \
-	&& apk add --no-cache mariadb-connector-c \
+		postgresql-dev \
+	&& apk add --no-cache postgresql-libs \
 	&& pip install --no-cache-dir pipenv \
 	&& pipenv install --system --clear \
 	&& apk del .build-deps \
