@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+from distutils.util import strtobool
 
 ENV = os.environ.get('DJANGO_ENV')
 if not ENV:
@@ -26,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '^j_x7a7u_#9ruh3p^h=*my_k+asoqob&xq@5n^2n2f(7$#dk(#' if ENV == 'dev' else os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG', True)
+DEBUG = bool(strtobool(os.environ.get('DJANGO_DEBUG', 'true')))
 
 ALLOWED_HOSTS = [
 	'perktree.localhost',

@@ -30,7 +30,7 @@ services:
     environment:
       SECRET_KEY: ${SECRET_KEY}
       DJANGO_ENV: prod
-      DJANGO_DEBUG: True
+      DJANGO_DEBUG: 'true'
       DJANGO_ADMIN_USER: ${DJANGO_ADMIN_USER}
       DJANGO_ADMIN_MAIL: ${DJANGO_ADMIN_MAIL}
       DJANGO_ADMIN_PASS: ${DJANGO_ADMIN_PASS}
