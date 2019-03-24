@@ -58,6 +58,10 @@ export default {
 	},
 	methods: {
 		renderGraph(graphData) {
+			for (let i = 0; i < graphData.nodes.length; i++) {
+				graphData.nodes[i].name = `${graphData.nodes[i].name} [${graphData.nodes[i].level}]`;
+			}
+
 			const svg = d3.select('#perktree').append('svg');
 			const chart = new Sankey.Path(svg);
 			const nodes = graphData.nodes;
