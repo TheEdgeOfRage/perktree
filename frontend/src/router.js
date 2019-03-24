@@ -48,9 +48,9 @@ const router = new Router({
 			name: 'logout',
 		},
 		{
-			path: '/admin',
-			name: 'admin-panel',
-			component: () => import(/* webpackChunkName: "admin" */ './components/auth/admin-panel.component'),
+			path: '/upload',
+			name: 'upload-perks',
+			component: () => import(/* webpackChunkName: "perks" */ './components/upload-perks.component'),
 		},
 		{
 			path: '/trees',

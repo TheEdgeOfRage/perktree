@@ -6,13 +6,11 @@
 #
 # Distributed under terms of the BSD-3-Clause license.
 
-
 import argparse
 import csv
 import json
 import os
 import re
-
 
 PERKS_DIR = os.environ.get('PERKS_DIR')
 

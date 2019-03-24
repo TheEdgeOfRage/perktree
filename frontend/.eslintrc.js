@@ -49,7 +49,10 @@ module.exports = {
     'consistent-this': 'error',
     'curly': 'error',
     'default-case': 'error',
-    'dot-location': [2, 'property'],
+    'dot-location': [
+2,
+'property',
+],
     'dot-notation': 'off',
     'eol-last': 'error',
     'eqeqeq': 'error',

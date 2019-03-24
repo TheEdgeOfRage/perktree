@@ -2,16 +2,16 @@
 	<v-container grid-list-md text-xs-center class="tree-list">
 		<v-layout row wrap>
 			<v-flex
-				v-for="(tree, index) in trees"
-				:key="index"
+				v-for="tree in trees"
+				:key="tree.id"
 				sm2
 				xs6
 			>
 				<v-btn
 					block
 					color="secondary"
-					@click="openPerks(index)"
-				>{{ tree }}</v-btn>
+					@click="openPerks(tree.id)"
+				>{{ tree.name }}</v-btn>
 			</v-flex>
 		</v-layout>
 	</v-container>
@@ -23,7 +23,7 @@
 import PerksController from '../controllers/perks.controller';
 
 export default {
-	name: 'Trees',
+	name: 'trees',
 	components: {
 	},
 	data () {

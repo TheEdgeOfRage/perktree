@@ -11,7 +11,7 @@
 					flat
 					v-for="item in toolbarItems"
 					:key="item.text"
-					:to="item.path"
+					:to="item.to"
 				>
 				<v-icon left>{{ item.icon }}</v-icon>
 				{{ item.text }}
@@ -30,7 +30,7 @@ import { mapGetters } from 'vuex';
 import AuthController from '../controllers/auth.controller.js';
 
 export default {
-	name: 'App',
+	name: 'app',
 	data() {
 		return {
 			// toolbarItems: {
@@ -41,7 +41,10 @@ export default {
 			// 	],
 			// 	'loggedOut': [{ icon: 'lock_open', text: 'Login', path: '/login' }],
 			// },
-			toolbarItems: [{ icon: 'fas fa-code-branch ', text: 'Perk trees', path: '/trees' }],
+			toolbarItems: [
+				{ icon: 'fas fa-upload', text: 'Upload perks', to: { name: 'upload-perks' } },
+				{ icon: 'fas fa-code-branch', text: 'Perk trees', to: { name: 'trees' } },
+			],
 		};
 	},
 	computed: {

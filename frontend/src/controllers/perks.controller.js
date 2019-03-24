@@ -16,4 +16,10 @@ export default class PerksController {
 	static getPerks(tree) {
 		return PerkApi.getPerks(tree);
 	}
+
+	static uploadPerks(file) {
+		const data = new FormData();
+		data.append('perk_list', file);
+		return PerkApi.uploadPerks(data);
+	}
 }

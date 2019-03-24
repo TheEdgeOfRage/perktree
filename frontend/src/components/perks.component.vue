@@ -66,7 +66,7 @@ export default {
 				.nodePadding(6)
 				.spread(false)
 				.colorNodes((name, node) => {
-					return this.colorScheme[node.colour];
+					return this.colorScheme[node.type];
 				})
 				.on('node:click', (node) => {
 					const clicked_node = _.find(nodes, (n) => {

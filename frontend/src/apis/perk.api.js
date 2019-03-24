@@ -19,5 +19,9 @@ export default class AuthApi {
 	static getPerks(tree) {
 		return Axios.get(ENDPOINTS.TREES + `/${tree}`);
 	}
+
+	static uploadPerks(data) {
+		return Axios.put(ENDPOINTS.TREES, data);
+	}
 }
 

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
 	'rest_framework',
+	'perks',
 ]
 
 MIDDLEWARE = [
@@ -75,14 +76,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'perktree.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
 DATABASES = {
 	'default': {
-		'ENGINE': os.environ.get('DB_ENGINE', ''),
-		'NAME': os.path.join(BASE_DIR, os.environ.get('DB_NAME', '')) if ENV == 'dev' else os.environ.get('DB_NAME', ''),
+		'ENGINE': os.environ.get('DB_ENGINE', 'django.db.backends.sqlite3'),
+		'NAME': os.path.join(BASE_DIR, os.environ.get('DB_NAME', 'db.sqlite3')) if ENV == 'dev' else os.environ.get('DB_NAME', ''),
 		'USER': os.environ.get('DB_USER', ''),
 		'PASSWORD': os.environ.get('DB_PASSWORD', ''),
 		'HOST': os.environ.get('DB_HOST', ''),
