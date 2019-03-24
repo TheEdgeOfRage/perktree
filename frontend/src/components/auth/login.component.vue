@@ -20,7 +20,7 @@
 						v-for="(error, index) in loginErrors"
 						:key="index"
 						class="login-errors"
-					>{{ error.description }}</p>
+					>{{ error }}</p>
 					<v-btn type="submit">Login</v-btn>
 				</form>
 			</v-card>
@@ -52,7 +52,10 @@ export default {
 			AuthController.login(data).then(() => {
 				this.$router.push({ name: 'index' });
 			}).catch((error) => {
-				this.loginErrors.push(error.response.data);
+				const errors = error.response.data.non_field_errors;
+				for (let i = 0; i < errors.length; i++) {
+					this.loginErrors.push(errors[i]);
+				}
 			});
 		},
 	},

@@ -5,7 +5,7 @@ services:
     container_name: perktree-db
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: perktree-root-password
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: perktree
     volumes:
       - /mnt/perktree/db:/var/lib/mysql
