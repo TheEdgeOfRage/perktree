@@ -2,7 +2,6 @@
 FROM python:3-alpine
 
 COPY backend /app
-COPY parser /app/parser
 WORKDIR /app
 EXPOSE 80
 
