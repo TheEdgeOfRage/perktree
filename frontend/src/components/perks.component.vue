@@ -24,7 +24,7 @@
 						color="primary"
 						flat
 						@click="dialog = false"
-					>Colse</v-btn>
+					>Close</v-btn>
 				</v-card-actions>
 			</v-card>
 		</v-dialog>

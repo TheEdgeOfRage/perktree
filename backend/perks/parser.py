@@ -51,6 +51,7 @@ class PerkParser():
 		for p in self.perks:
 			perk = self.create_perk(name=p['name'].strip(), effect=p['effect'].strip(), level=int(p['level']), perk_type=0)
 			for tree_name in p['tree'].split(','):
+				tree_name = tree_name.strip()
 				try:
 					tree = Tree.objects.get(name=tree_name)
 					perk.trees.add(tree)
