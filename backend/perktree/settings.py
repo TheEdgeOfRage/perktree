@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '^j_x7a7u_#9ruh3p^h=*my_k+asoqob&xq@5n^2n2f(7$#dk(#' if ENV == 'dev' else os.environ.get('SECRET_KEY')
+SECRET_KEY = '^j_x7a7u_#9ruH3P^h=*mY_k+aSOqob&XQ@5n^2N2f(7$#Dk(#' if ENV == 'dev' else os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(strtobool(os.environ.get('DJANGO_DEBUG', 'true')))
@@ -81,13 +81,12 @@ WSGI_APPLICATION = 'perktree.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 DATABASES = {
 	'default': {
-		'ENGINE': os.environ.get('DB_ENGINE', 'django.db.backends.sqlite3'),
-		#  'NAME': os.path.join(BASE_DIR, os.environ.get('DB_NAME', 'db.sqlite3')) if ENV == 'dev' else os.environ.get('DB_NAME', ''),
+		'ENGINE': os.environ.get('DB_ENGINE', 'django.db.backends.postgresql'),
 		'NAME': os.environ.get('DB_NAME', 'perktree'),
 		'USER': os.environ.get('DB_USER', 'root'),
-		'PASSWORD': os.environ.get('DB_PASSWORD', ''),
-		'HOST': os.environ.get('DB_HOST', ''),
-		'PORT': os.environ.get('DB_PORT', ''),
+		'PASSWORD': os.environ.get('DB_PASSWORD', 'root'),
+		'HOST': os.environ.get('DB_HOST', 'localhost'),
+		'PORT': os.environ.get('DB_PORT', '5432'),
 	}
 }
 
