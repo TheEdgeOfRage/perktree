@@ -5,6 +5,7 @@
 				<upload-button
 					:fileChangedCallback="upload"
 					:title="buttonText"
+					:disabled="loading"
 				>
 					<template
 						v-if="loading"
