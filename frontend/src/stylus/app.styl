@@ -1,11 +1,24 @@
-h1, h2, h3, h4, h5, h6, p, span
+*
 	color #ebdbb2
 
-.v-toolbar__title
-	a
-		color #ebdbb2
-		text-decoration none
+.v-toolbar
+	.v-toolbar__title
+		a
+			color #ebdbb2
+			text-decoration none
 
-.v-btn
-	color #ebdbb2 !important
+	input
+		color #ebdbb2 !important
+		caret-color #fbf1c7
+
+	.v-btn, .v-icon
+		color #ebdbb2
+
+	.v-input__slot
+		&::before
+			border-color #bdae93 !important
+
+		&:hover
+			&::before
+				border-color #ebdbb2 !important
 

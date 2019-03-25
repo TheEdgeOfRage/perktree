@@ -7,6 +7,11 @@
 			<v-spacer></v-spacer>
 
 			<v-toolbar-items>
+				<v-text-field
+					hide-details
+					prepend-icon="search"
+					single-line
+				></v-text-field>
 				<v-btn
 					flat
 					v-for="item in toolbarItems"

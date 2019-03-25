@@ -13,9 +13,9 @@
 		>
 			<v-card>
 				<v-card-title
-				class="headline grey darken-2"
-				primary-title
-			>{{ perk }}</v-card-title>
+					class="headline grey darken-2"
+					primary-title
+				>{{ perk }}</v-card-title>
 				<v-card-text>{{ effect }}</v-card-text>
 				<v-divider></v-divider>
 				<v-card-actions>
@@ -58,17 +58,17 @@ export default {
 	},
 	methods: {
 		renderGraph(graphData) {
-			for (let i = 0; i < graphData.nodes.length; i++) {
-				graphData.nodes[i].name = `${graphData.nodes[i].name} [${graphData.nodes[i].level}]`;
-			}
-
 			const svg = d3.select('#perktree').append('svg');
 			const chart = new Sankey.Path(svg);
 			const nodes = graphData.nodes;
 
 			chart.nodeWidth(24)
 				.nodePadding(6)
+				.iterations(32)
 				.spread(false)
+				.name((n) => {
+					return `${n.name} [${n.level}]`;
+				})
 				.colorNodes((name, node) => {
 					return this.colorScheme[node.type];
 				})

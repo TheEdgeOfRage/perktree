@@ -6,10 +6,7 @@
 #
 # Distributed under terms of the BSD-3-Clause license.
 
-import json
-
-from os import listdir, environ
-from os.path import isfile, join
+from os import environ
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import authentication  # , permissions
@@ -59,12 +56,6 @@ class Perks(APIView):
 			'links': [],
 		}
 
-		#  link ={
-			#  'source': link_source,
-			#  'target': i,
-			#  'value': 1,
-		#  }
-
 		tree = Tree.objects.get(id=tree_id)
 		perks = list(Perk.objects.filter(trees__name__contains=tree.name))
 		all_perks = list(perks)
@@ -84,8 +75,11 @@ class Perks(APIView):
 				})
 
 		for perk in all_perks:
-			serialized_perk = PerkSerializer(perk)
-			output_data['nodes'].append(serialized_perk.data)
+			serialized_perk = PerkSerializer(perk).data
+			tree_list = perk.trees.all()
+			if tree_list and 'Skill Focus' not in perk.name and 'Ability Focus' not in perk.name and tree not in tree_list:
+				serialized_perk['name'] = f'{serialized_perk["name"]} ({tree_list[0].name})'
+			output_data['nodes'].append(serialized_perk)
 
 		return Response(output_data)
 
