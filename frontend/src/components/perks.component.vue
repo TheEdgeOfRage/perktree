@@ -1,7 +1,7 @@
 <template>
 	<v-container class="perktree">
 		<v-layout row wrap>
-			<v-flex md8 offset-md2 sm12>
+			<v-flex xl8 offset-xl2 sm12>
 				<v-card>
 					<div id="perktree"></div>
 				</v-card>
