@@ -64,7 +64,7 @@ export default {
 	},
 	computed: {
 		buttonText() {
-			return this.loading ? 'Loading...' : 'Upload'
+			return this.loading ? 'Loading...' : 'Upload';
 		},
 	},
 	methods: {
