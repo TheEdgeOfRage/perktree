@@ -12,8 +12,8 @@ from rest_framework.response import Response
 from rest_framework import authentication  # , permissions
 
 from .parser import PerkParser
-from .models import Perk, Tree
-from .serializers import PerkSerializer, TreeSerializer
+from .models import Perk, Tree, User
+from .serializers import PerkSerializer, TreeSerializer, UserSerializer
 
 
 PERKS_DIR = environ.get('PERKS_DIR')
@@ -22,7 +22,7 @@ if not PERKS_DIR:
 	PERKS_DIR = '../static/perks'
 
 
-class Trees(APIView):
+class TreeView(APIView):
 	authentication_classes = (authentication.TokenAuthentication,)
 	#  permission_classes = (permissions.IsAuthenticated,)
 
@@ -46,7 +46,7 @@ class Trees(APIView):
 		return Response({'message': 'Upload successful'})
 
 
-class Perks(APIView):
+class PerkView(APIView):
 	authentication_classes = (authentication.TokenAuthentication,)
 	#  permission_classes = (permissions.IsAuthenticated,)
 
@@ -82,4 +82,14 @@ class Perks(APIView):
 			output_data['nodes'].append(serialized_perk)
 
 		return Response(output_data)
+
+
+class UserView(APIView):
+	authentication_classes = (authentication.TokenAuthentication,)
+
+	def get(self, request, user_id):
+		user = User.objects.get(id=user_id)
+		serialized_user = UserSerializer(user).data
+
+		return Response(serialized_user)
 

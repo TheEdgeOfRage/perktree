@@ -7,6 +7,7 @@
 # Distributed under terms of the BSD-3-Clause license.
 
 from django.db import models
+from django.contrib.auth.models import User as AuthUser
 
 
 class Tree(models.Model):
@@ -32,3 +33,9 @@ class Perk(models.Model):
 
 	class Meta:
 		ordering = ('name',)
+
+
+class User(models.Model):
+	base_user = models.OneToOneField(AuthUser, on_delete=models.CASCADE)
+	perks = models.ManyToManyField(Perk, related_name='users', symmetrical=False)
+
