@@ -40,10 +40,13 @@ const configureHttp = () => {
 };
 
 const configureRaven = () => {
-	Raven
-		.config('https://2b1b0eea285244289175e53d65421fac@sentry.theedgeofrage.com/3')
-		.addPlugin(RavenVue, Vue)
-		.install();
+	if (config.getEnv() !== 'dev') {
+		console.log('Setting up Raven.js');
+		Raven
+			.config('https://2b1b0eea285244289175e53d65421fac@sentry.theedgeofrage.com/3')
+			.addPlugin(RavenVue, Vue)
+			.install();
+	}
 };
 
 configureHttp();

@@ -7,12 +7,14 @@
 # Distributed under terms of the BSD-3-Clause license.
 
 from os import environ
-from rest_framework.views import APIView
+from django.contrib.auth.models import User as AuthUser
+#  from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework import permissions
+from rest_framework.views import APIView
 
-from .parser import PerkParser
 from .models import Perk, Tree, User
+from .parser import PerkParser
+from .permissions import IsPostOrIsAuthenticated, IsGetOrIsSuperuser
 from .serializers import PerkSerializer, TreeSerializer, UserSerializer
 
 
@@ -23,7 +25,7 @@ if not PERKS_DIR:
 
 
 class TreeView(APIView):
-	#  permission_classes = (permissions.IsAuthenticated,)
+	permission_classes = (IsGetOrIsSuperuser,)
 
 	def get(self, request, format=None):
 		trees = []
@@ -46,7 +48,7 @@ class TreeView(APIView):
 
 
 class PerkView(APIView):
-	#  permission_classes = (permissions.IsAuthenticated,)
+	permission_classes = (IsGetOrIsSuperuser,)
 
 	def get(self, request, tree_id, format=None):
 		output_data = {
@@ -83,9 +85,12 @@ class PerkView(APIView):
 
 
 class UserView(APIView):
-	permission_classes = (permissions.IsAuthenticated,)
+	permission_classes = (IsPostOrIsAuthenticated,)
 
 	def get(self, request):
+		if not request.user.id:
+			return Response(status=404)
+
 		user = User.objects.get(base_user__id=request.user.id)
 		serialized_user = UserSerializer(user).data
 
@@ -105,6 +110,17 @@ class UserView(APIView):
 				for perk_id in removed_perks:
 					perk = Perk.objects.get(id=perk_id)
 					user.perks.remove(perk)
+
+		serialized_user = UserSerializer(user).data
+		return Response(serialized_user)
+
+	def post(self, request):
+		username = request.data['username']
+		email = request.data['email']
+		password = request.data['password']
+		base_user = AuthUser.objects.create_user(username=username, email=email, password=password)
+		user = User(base_user=base_user)
+		user.save()
 
 		serialized_user = UserSerializer(user).data
 		return Response(serialized_user)

@@ -42,7 +42,7 @@
 </template>
 
 <script>
-	import AuthController from '../../controllers/auth.controller';
+	import UserController from '../../controllers/user.controller';
 
 	export default {
 		name: 'signup',
@@ -58,6 +58,8 @@
 		methods: {
 			submit(event) {
 				event.preventDefault();
+				this.signupErrors = [];
+
 				if (this.password !== this.passwordConfirm) {
 					this.signupErrors.push('Passwords do not match');
 					return;
@@ -68,7 +70,7 @@
 					email: this.email,
 					password: this.password,
 				};
-				AuthController.signup(data).then(() => {
+				UserController.createUser(data).then(() => {
 					this.$router.push({ name: 'index' });
 				}).catch((error) => {
 					if (error.response) {
