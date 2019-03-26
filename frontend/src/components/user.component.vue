@@ -6,7 +6,7 @@
 
 <script>
 
-import AuthController from '../controllers/auth.controller';
+// import AuthController from '../controllers/auth.controller';
 
 export default {
 	name: 'Index',
@@ -19,9 +19,8 @@ export default {
 	methods: {
 	},
 	mounted() {
-		AuthController.getUser().then((response) => {
-			console.log(response.data);
-		});
+		// AuthController.getUser().then((response) => {
+		// });
 	},
 };
 </script>
