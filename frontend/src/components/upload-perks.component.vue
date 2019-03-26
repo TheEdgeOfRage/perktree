@@ -49,7 +49,7 @@
 <script>
 import UploadButton from 'vuetify-upload-button';
 
-import PerksController from '../controllers/perks.controller';
+import PerkController from '../controllers/perk.controller';
 
 export default {
 	name: 'admin-panel',
@@ -71,7 +71,7 @@ export default {
 	methods: {
 		upload(file) {
 			this.loading = true;
-			PerksController.uploadPerks(file).then(() => {
+			PerkController.uploadPerks(file).then(() => {
 				this.loading = false;
 				this.$router.push({ name: 'trees' });
 			}).catch((error) => {

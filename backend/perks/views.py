@@ -9,7 +9,7 @@
 from os import environ
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import authentication  # , permissions
+from rest_framework import permissions
 
 from .parser import PerkParser
 from .models import Perk, Tree, User
@@ -23,7 +23,6 @@ if not PERKS_DIR:
 
 
 class TreeView(APIView):
-	authentication_classes = (authentication.TokenAuthentication,)
 	#  permission_classes = (permissions.IsAuthenticated,)
 
 	def get(self, request, format=None):
@@ -47,7 +46,6 @@ class TreeView(APIView):
 
 
 class PerkView(APIView):
-	authentication_classes = (authentication.TokenAuthentication,)
 	#  permission_classes = (permissions.IsAuthenticated,)
 
 	def get(self, request, tree_id, format=None):
@@ -85,11 +83,29 @@ class PerkView(APIView):
 
 
 class UserView(APIView):
-	authentication_classes = (authentication.TokenAuthentication,)
+	permission_classes = (permissions.IsAuthenticated,)
 
-	def get(self, request, user_id):
-		user = User.objects.get(id=user_id)
+	def get(self, request):
+		user = User.objects.get(base_user__id=request.user.id)
 		serialized_user = UserSerializer(user).data
 
+		return Response(serialized_user)
+
+	def patch(self, request):
+		user = User.objects.get(base_user__id=request.user.id)
+		if 'perks' in request.data:
+			current_perks = [perk.id for perk in user.perks.all()]
+			new_perks = request.data['perks']
+			if len(current_perks) < len(new_perks):
+				for perk_id in new_perks:
+					perk = Perk.objects.get(id=perk_id)
+					user.perks.add(perk)
+			elif len(current_perks) > len(new_perks):
+				removed_perks = list(set(current_perks) ^ set(new_perks))
+				for perk_id in removed_perks:
+					perk = Perk.objects.get(id=perk_id)
+					user.perks.remove(perk)
+
+		serialized_user = UserSerializer(user).data
 		return Response(serialized_user)
 

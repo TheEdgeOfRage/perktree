@@ -1,5 +1,5 @@
 /*
- * perks.controller.js
+ * auth.controller.js
  * Copyright (C) 2019 pavle <pavle.portic@tilda.center>
  *
  * Distributed under terms of the BSD-3-Clause license.
@@ -40,7 +40,7 @@ export default class AuthController {
 	static setupToken() {
 		const access = this.getLocalStorageToken().access;
 		AuthApi.setAuthHeader(access);
-		store.commit('setToken', access);
+		store.commit('login');
 	}
 
 	static login(data) {
@@ -56,7 +56,7 @@ export default class AuthController {
 
 	static logout() {
 		this.clearLocalStorageToken();
-		store.commit('clearToken');
+		store.commit('logout');
 		AuthApi.setAuthHeader('');
 	}
 

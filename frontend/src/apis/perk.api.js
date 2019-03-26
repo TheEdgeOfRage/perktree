@@ -9,6 +9,7 @@ import Axios from 'axios';
 
 const ENDPOINTS = {
 	TREES: '/trees',
+	PERKS: '/perks',
 };
 
 export default class AuthApi {

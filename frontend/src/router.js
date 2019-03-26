@@ -68,6 +68,11 @@ const router = new Router({
 				guest: true,
 			},
 		},
+		{
+			path: '/user',
+			name: 'user',
+			component: () => import(/* webpackChunkName: "user" */ './components/user.component'),
+		},
 	],
 });
 
@@ -78,7 +83,7 @@ router.isCurrentRoute = (routeName) => {
 router.beforeEach((to, from, next) => {
 	if (to.name === 'logout') {
 		AuthController.logout();
-		return next({ name: 'login' });
+		return next({ name: 'index' });
 	}
 
 	if (!to.meta.guest && !AuthController.getAuthStatus()) {

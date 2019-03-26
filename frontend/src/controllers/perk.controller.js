@@ -1,14 +1,13 @@
 /*
- * perks.controller.js
+ * perk.controller.js
  * Copyright (C) 2019 pavle <pavle.portic@tilda.center>
  *
  * Distributed under terms of the BSD-3-Clause license.
  */
 
 import PerkApi from '../apis/perk.api';
-// import router from '../router';
 
-export default class PerksController {
+export default class PerkController {
 	static getTrees() {
 		return PerkApi.getTrees();
 	}
@@ -23,3 +22,4 @@ export default class PerksController {
 		return PerkApi.uploadPerks(data);
 	}
 }
+

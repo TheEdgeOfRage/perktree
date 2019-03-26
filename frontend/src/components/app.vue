@@ -14,7 +14,7 @@
 				></v-text-field>
 				<v-btn
 					flat
-					v-for="item in toolbarItems"
+					v-for="item in toolbarItems[authStatus]"
 					:key="item.text"
 					:to="item.to"
 				>
@@ -38,28 +38,25 @@ export default {
 	name: 'app',
 	data() {
 		return {
-			// toolbarItems: {
-			// 	'loggedIn': [
-			// 		{ icon: 'fas fa-code-branch ', text: 'Perk trees', path: '/trees' },
-			// 		{ icon: 'account_circle', text: 'Admin panel', path: '/admin' },
-			// 		{ icon: 'exit_to_app', text: 'Logout', path: '/logout' },
-			// 	],
-			// 	'loggedOut': [{ icon: 'lock_open', text: 'Login', path: '/login' }],
-			// },
-			toolbarItems: [
-				{ icon: 'fas fa-upload', text: 'Upload perks', to: { name: 'upload-perks' } },
-				{ icon: 'fas fa-code-branch', text: 'Perk trees', to: { name: 'trees' } },
-			],
+			toolbarItems: {
+				true: [
+					{ icon: 'fas fa-upload', text: 'Upload perks', to: { name: 'upload-perks' } },
+					{ icon: 'fas fa-code-branch', text: 'Perk trees', to: { name: 'trees' } },
+					{ icon: 'fas fa-sign-out-alt', text: 'Logout', to: { name: 'logout' } },
+				],
+				false: [{ icon: 'fas fa-sign-in-alt', text: 'Login', to: { name: 'login' } }],
+			},
 		};
 	},
 	computed: {
-		...mapGetters(['token']),
-		authStatus() {
-			return this.token ? 'loggedIn' : 'loggedOut';
-		},
+		...mapGetters(['authStatus']),
 	},
 	mounted() {
-		AuthController.refreshToken();
+		AuthController.refreshToken().catch(() => {
+			if (!this.$route.meta.guest) {
+				this.$router.push({ name: 'index' });
+			}
+		});
 	},
 };
 </script>

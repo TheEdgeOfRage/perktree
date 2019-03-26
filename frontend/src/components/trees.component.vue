@@ -20,7 +20,7 @@
 <script>
 // import * as _ from 'lodash';
 
-import PerksController from '../controllers/perks.controller';
+import PerkController from '../controllers/perk.controller';
 
 export default {
 	name: 'trees',
@@ -37,7 +37,7 @@ export default {
 		},
 	},
 	mounted() {
-		PerksController.getTrees().then((response) => {
+		PerkController.getTrees().then((response) => {
 			this.trees = response.data;
 		});
 	},

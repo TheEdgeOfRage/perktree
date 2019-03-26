@@ -23,14 +23,14 @@ const configureHttp = () => {
 		},
 		(error) => {
 			if (error.response && error.response.status === 401) {
-				// AuthController.refreshToken().catch(() => {
-					// router.push({
-						// name: 'logout',
-					// });
-				// });
-				router.push({
-					name: 'logout',
+				AuthController.refreshToken().catch(() => {
+					router.push({
+						name: 'logout',
+					});
 				});
+				// router.push({
+					// name: 'logout',
+				// });
 			}
 
 			return Promise.reject(error);
