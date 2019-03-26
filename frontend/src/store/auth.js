@@ -1,17 +1,12 @@
 /*
- * store.js
+ * auth.js
  * Copyright (C) 2019 pavle <pavle.portic@tilda.center>
  *
  * Distributed under terms of the BSD-3-Clause license.
  */
 
-import Vue from 'vue';
-import Vuex from 'vuex';
-
-Vue.use(Vuex);
-
 const state = {
-	authStatus: null,
+	authStatus: false,
 };
 
 const getters = {
@@ -27,9 +22,9 @@ const mutations = {
 	},
 };
 
-export default new Vuex.Store({
+export default {
 	state,
 	getters,
 	mutations,
-});
+};
 

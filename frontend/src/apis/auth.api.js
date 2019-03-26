@@ -23,10 +23,6 @@ export default class AuthApi {
 		return Axios.post(ENDPOINTS.LOGIN, data);
 	}
 
-	static signup(data) {
-		return Axios.post(ENDPOINTS.USER, data);
-	}
-
 	static changePassword(data) {
 		return Axios.patch(ENDPOINTS.USER, data);
 	}

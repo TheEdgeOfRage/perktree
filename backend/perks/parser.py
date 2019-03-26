@@ -8,6 +8,7 @@
 
 import csv
 import re
+
 from .models import Tree, Perk
 
 requirement_pattern = re.compile(r'([\w\s]+) \(([\w\s]+)\)')
@@ -94,11 +95,19 @@ class PerkParser():
 					elif 'Skill Focus' in req_name or 'Ability Focus' in req_name:
 						req_match = re.match(requirement_pattern, req_name)
 						req_tree = Tree.objects.get(name=req_match.group(2))
-
 						req_base_name = req_match.group(1)
 						base_req = Perk.objects.get(name=req_base_name)
-
 						req = self.create_perk(name=req_name, effect=base_req.effect, level=base_req.level, perk_type=base_req.type, trees=[req_tree])
+						if 'Greater' in req_base_name:
+							greater_req_name = req_name[8:]
+							try:
+								greater_req = Perk.objects.get(name=greater_req_name)
+							except Perk.DoesNotExist:
+								greater_req_base_name = req_base_name[8:]
+								greater_base_req = Perk.objects.get(name=greater_req_base_name)
+								greater_req = self.create_perk(name=greater_req_name, effect=greater_base_req.effect, level=greater_base_req.level, perk_type=greater_base_req.type, trees=[req_tree])
+
+							req.parents.add(greater_req)
 					else:
 						req = self.create_perk(name=req_name, level=0, perk_type=4)
 				perk.parents.add(req)

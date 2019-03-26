@@ -16,6 +16,9 @@ class Tree(models.Model):
 	def __str__(self):
 		return self.name
 
+	def __repr__(self):
+		return f'<Tree: {str(self)}>'
+
 	class Meta:
 		ordering = ('name',)
 
@@ -29,7 +32,10 @@ class Perk(models.Model):
 	trees = models.ManyToManyField('Tree', related_name='perks', symmetrical=False)
 
 	def __str__(self):
-		return f'{self.name}'
+		return f'{self.name} [{self.level}]'
+
+	def __repr__(self):
+		return f'<Perk: {str(self)}>'
 
 	class Meta:
 		ordering = ('name',)
@@ -38,4 +44,10 @@ class Perk(models.Model):
 class User(models.Model):
 	base_user = models.OneToOneField(AuthUser, on_delete=models.CASCADE)
 	perks = models.ManyToManyField(Perk, related_name='users', symmetrical=False)
+
+	def __str__(self):
+		return f'{self.base_user.username} ({self.id})'
+
+	def __repr__(self):
+		return f'<User: {str(self)}>'
 

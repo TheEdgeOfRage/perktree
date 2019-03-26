@@ -68,7 +68,7 @@
 					email: this.email,
 					password: this.password,
 				};
-				AuthController.register(data).then(() => {
+				AuthController.signup(data).then(() => {
 					this.$router.push({ name: 'index' });
 				}).catch((error) => {
 					if (error.response) {
@@ -83,8 +83,9 @@
 <style lang="stylus">
 .signup-form-card
 	padding 2rem
+	margin-top 5rem
 
-.login-errors
+.signup-errors
 	color red
 </style>
 

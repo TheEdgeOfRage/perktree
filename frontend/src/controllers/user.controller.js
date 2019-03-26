@@ -12,6 +12,10 @@ export default class AuthController {
 		return UserApi.getUser();
 	}
 
+	static signup(data) {
+		return UserApi.signup(data);
+	}
+
 	static updatePerks(perks) {
 		const data = {
 			perks,

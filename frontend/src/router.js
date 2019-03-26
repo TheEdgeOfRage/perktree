@@ -37,7 +37,7 @@ const router = new Router({
 		},
 		{
 			path: '/signup',
-			name: 'signpu',
+			name: 'signup',
 			component: Signup,
 			meta: {
 				guest: true,

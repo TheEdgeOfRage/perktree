@@ -5,6 +5,8 @@
  * Distributed under terms of the BSD-3-Clause license.
  */
 
+import * as _ from 'lodash';
+
 import AuthApi from '../apis/auth.api';
 import router from '../router';
 import store from '../store';
@@ -38,24 +40,22 @@ export default class AuthController {
 	}
 
 	static setupToken() {
-		const access = this.getLocalStorageToken().access;
-		AuthApi.setAuthHeader(access);
-		store.commit('login');
+		const access = AuthController.getLocalStorageToken().access;
+		if (access) {
+			AuthApi.setAuthHeader(access);
+			store.commit('login');
+		}
 	}
 
 	static login(data) {
 		return AuthApi.login(data).then((response) => {
-			this.setLocalStorageToken(response.data);
-			this.setupToken(response.data);
+			AuthController.setLocalStorageToken(response.data);
+			AuthController.setupToken(response.data);
 		});
 	}
 
-	static signup(data) {
-		return AuthApi.signup(data);
-	}
-
 	static logout() {
-		this.clearLocalStorageToken();
+		AuthController.clearLocalStorageToken();
 		store.commit('logout');
 		AuthApi.setAuthHeader('');
 	}
@@ -65,7 +65,7 @@ export default class AuthController {
 	}
 
 	static verifyToken() {
-		const token = this.getLocalStorageToken().access;
+		const token = AuthController.getLocalStorageToken().access;
 		if (token === null) {
 			router.push('login');
 		}
@@ -73,22 +73,24 @@ export default class AuthController {
 	}
 
 	static refreshToken() {
-		if (!this.getLocalStorageRefresh()) {
+		if (!AuthController.getLocalStorageRefresh()) {
 			return Promise.reject(new Error('No token'));
 		}
 
 		const refresh = {
-			refresh: this.getLocalStorageToken().refresh,
+			refresh: AuthController.getLocalStorageToken().refresh,
 		};
 
+		_.delay(AuthController.refreshToken, 240000);
+
 		return AuthApi.refreshToken(refresh).then((response) => {
-			this.setLocalStorageToken(response.data);
-			this.setupToken();
+			AuthController.setLocalStorageToken(response.data);
+			AuthController.setupToken();
 		});
 	}
 
 	static getAuthStatus() {
-		const token = this.getLocalStorageToken().access;
+		const token = AuthController.getLocalStorageToken().access;
 		return Boolean(token);
 	}
 }

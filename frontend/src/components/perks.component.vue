@@ -1,7 +1,7 @@
 <template>
 	<v-container class="perktree">
 		<v-layout row wrap>
-			<v-flex xl8 offset-xl2 sm12>
+			<v-flex xl10 offset-xl1 sm12>
 				<v-card>
 					<div id="perktree"></div>
 				</v-card>
@@ -129,10 +129,8 @@ export default {
 					const clickedNode = _.find(nodes, (n) => {
 						return n.name === node.name;
 					});
-					if (clickedNode.effect) {
-						this.selectedPerk = clickedNode;
-						this.dialog = true;
-					}
+					this.selectedPerk = clickedNode;
+					this.dialog = true;
 				})
 				.draw(graphData);
 		},

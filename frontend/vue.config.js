@@ -6,8 +6,8 @@
  */
 
 module.exports = {
-  devServer: {
-    disableHostCheck: true,
-    public: 'perktree.localhost',
-  },
+	devServer: {
+		disableHostCheck: true,
+		public: 'perktree.localhost',
+	},
 };

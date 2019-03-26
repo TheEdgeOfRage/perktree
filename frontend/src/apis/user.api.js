@@ -16,6 +16,10 @@ export default class AuthApi {
 		return Axios.get(ENDPOINTS.USER);
 	}
 
+	static createUser(data) {
+		return Axios.post(ENDPOINTS.USER, data);
+	}
+
 	static updatePerks(data) {
 		return Axios.patch(ENDPOINTS.USER, data);
 	}
