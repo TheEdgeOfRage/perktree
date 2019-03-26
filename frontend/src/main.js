@@ -1,5 +1,9 @@
 import Axios from 'axios';
 import Vue from 'vue';
+import Raven from 'raven-js';
+import RavenVue from 'raven-js/plugins/vue';
+
+
 import './plugins/vuetify';
 
 import App from './components/app.vue';
@@ -23,14 +27,13 @@ const configureHttp = () => {
 		},
 		(error) => {
 			if (error.response && error.response.status === 401) {
-				AuthController.refreshToken().catch(() => {
+				AuthController.refreshToken().then(() => {
+					router.push({ path: router.currentRoute.path });
+				}).catch(() => {
 					router.push({
 						name: 'logout',
 					});
 				});
-				// router.push({
-					// name: 'logout',
-				// });
 			}
 
 			return Promise.reject(error);
@@ -38,8 +41,17 @@ const configureHttp = () => {
 	);
 };
 
+const configureRaven = () => {
+	if (config.getEnv() !== 'dev') {
+		Raven
+			.config('https://2b1b0eea285244289175e53d65421fac@sentry.theedgeofrage.com/3')
+			.addPlugin(RavenVue, Vue)
+			.install();
+	}
+};
+
 configureHttp();
-AuthController.setupToken();
+configureRaven();
 
 new Vue({
 	router,
