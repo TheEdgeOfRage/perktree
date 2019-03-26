@@ -20,8 +20,7 @@ if not User.objects.filter(base_user__username='${DJANGO_ADMIN_USER}').count() :
 	admin.save()
 
 if not AuthUser.objects.filter(username='user').count() :
-	base_user = AuthUser(username='user', email='user@example.com', password='user')
-	base_user.save()
+	base_user = create_user('user', 'user@example.com', 'user')
 if not User.objects.filter(base_user__username='user').count() :
 	base_user = AuthUser.objects.get(username='user')
 	user = User(base_user=base_user)
