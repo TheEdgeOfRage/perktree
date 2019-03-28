@@ -50,6 +50,21 @@ class TreeView(APIView):
 class PerkView(APIView):
 	permission_classes = (IsGetOrIsSuperuser,)
 
+	def create_link(self, req, all_perks, output_data, target_index):
+		if req not in all_perks:
+			all_perks.append(req)
+			source_index = len(all_perks) - 1
+		else:
+			source_index = all_perks.index(req)
+
+		output_data['links'].append({
+			'source': source_index,
+			'target': target_index,
+			'value': 1,
+		})
+
+		return source_index
+
 	def get(self, request, tree_id, format=None):
 		output_data = {
 			'nodes': [],
@@ -62,17 +77,9 @@ class PerkView(APIView):
 		for i in range(len(perks)):
 			perk = all_perks[i]
 			for req in perk.parents.all():
-				if req not in all_perks:
-					all_perks.append(req)
-					source_index = len(all_perks) - 1
-				else:
-					source_index = all_perks.index(req)
-
-				output_data['links'].append({
-					'source': source_index,
-					'target': i,
-					'value': 1,
-				})
+				source_index = self.create_link(req, all_perks, output_data, i)
+				if req.name.startswith('Greater Skill Focus') or req.name.startswith('Greater Ability Focus'):
+					self.create_link(req.parents.get(), all_perks, output_data, source_index)
 
 		for perk in all_perks:
 			serialized_perk = PerkSerializer(perk).data

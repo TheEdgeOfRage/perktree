@@ -32,7 +32,7 @@ class Perk(models.Model):
 	trees = models.ManyToManyField('Tree', related_name='perks', symmetrical=False)
 
 	def __str__(self):
-		return f'{self.name} [{self.level}]'
+		return f'{self.name}, {self.level} {[parent.name for parent in self.parents.all()]}'
 
 	def __repr__(self):
 		return f'<Perk: {str(self)}>'

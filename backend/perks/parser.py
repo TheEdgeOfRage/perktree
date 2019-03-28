@@ -80,10 +80,6 @@ class PerkParser():
 
 				try:
 					req = Perk.objects.get(name__iexact=req_name)
-					if req.type == 0:
-						req_tree = req.trees.all()[0]
-					else:
-						req_tree = None
 
 				except Perk.DoesNotExist:
 					if re.match(class_pattern, req_name):
@@ -98,7 +94,7 @@ class PerkParser():
 						req_base_name = req_match.group(1)
 						base_req = Perk.objects.get(name=req_base_name)
 						req = self.create_perk(name=req_name, effect=base_req.effect, level=base_req.level, perk_type=base_req.type, trees=[req_tree])
-						if 'Greater' in req_base_name:
+						if req_base_name.startswith('Greater'):
 							greater_req_name = req_name[8:]
 							try:
 								greater_req = Perk.objects.get(name=greater_req_name)
@@ -110,6 +106,7 @@ class PerkParser():
 							req.parents.add(greater_req)
 					else:
 						req = self.create_perk(name=req_name, level=0, perk_type=4)
+
 				perk.parents.add(req)
 
 	def output_transform(self):
