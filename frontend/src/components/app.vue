@@ -45,6 +45,7 @@ export default {
 					{ icon: 'fas fa-sign-out-alt', text: 'Logout', to: { name: 'logout' } },
 				],
 				false: [
+					{ icon: 'fas fa-code-branch', text: 'Perk trees', to: { name: 'trees' } },
 					{ icon: 'fas fa-sign-in-alt', text: 'Login', to: { name: 'login' } },
 					{ icon: 'fas fa-user-plus ', text: 'Sign up', to: { name: 'signup' } },
 				],

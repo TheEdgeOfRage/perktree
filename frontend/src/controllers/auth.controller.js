@@ -57,7 +57,7 @@ export default class AuthController {
 	static logout() {
 		AuthController.clearLocalStorageToken();
 		store.commit('logout');
-		AuthApi.setAuthHeader('');
+		AuthApi.setAuthHeader(null);
 	}
 
 	static changePassword(data) {

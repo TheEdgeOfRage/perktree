@@ -16,6 +16,11 @@ const AUTH_HEADER = 'Authorization';
 
 export default class AuthApi {
 	static setAuthHeader(token) {
+		if (!token) {
+			Reflect.deleteProperty(Axios.defaults.headers.common, AUTH_HEADER);
+			return;
+		}
+
 		Axios.defaults.headers.common[AUTH_HEADER] = `Bearer ${token}`;
 	}
 

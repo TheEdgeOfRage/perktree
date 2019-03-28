@@ -49,8 +49,10 @@
 
 <script>
 import * as d3 from 'd3';
-import Sankey from 'd3.chart.sankey';
 import * as _ from 'lodash';
+import Sankey from 'd3.chart.sankey';
+
+import { mapGetters } from 'vuex';
 
 import PerkController from '../controllers/perk.controller';
 import UserController from '../controllers/user.controller';
@@ -86,7 +88,12 @@ export default {
 		};
 	},
 	computed: {
+		...mapGetters(['authStatus']),
 		canUnlock() {
+			if (!this.authStatus) {
+				return false;
+			}
+
 			const isLocked = _.indexOf(this.user.perks, this.selectedPerk.id);
 			if (isLocked !== -1) {
 				return false;
@@ -98,6 +105,10 @@ export default {
 			return requirement_ids.every((req) => this.user.perks.includes(req));
 		},
 		canLock() {
+			if (!this.authStatus) {
+				return false;
+			}
+
 			const dependencies = _.filter(this.graphData.links, { source: this.selectedPerk });
 			const dependency_ids = _.map(dependencies, 'target.id');
 			const isLocked = _.indexOf(this.user.perks, this.selectedPerk.id);
@@ -172,6 +183,9 @@ export default {
 		PerkController.getPerks(this.$route.params.tree).then((response) => {
 			this.graphData = response.data;
 			this.renderGraph(this.graphData);
+			if (!this.authStatus) {
+				return;
+			}
 			UserController.getUser().then((response) => {
 				this.user = response.data;
 				this.markUnlockedPerks();
