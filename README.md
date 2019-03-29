@@ -8,12 +8,13 @@ Interactive DnD perktree written with django, vue and d3
 The easiest way to run it is using docker-compose.
 
 1. Create a `.env` file with the following entries
-
-    SECRET_KEY=[long random string]
-    DJANGO_ADMIN_USER=[username]
-    DJANGO_ADMIN_MAIL=[email]
-    DJANGO_ADMIN_PASS=[password]
-    DB_PASSWORD=[database-password]
+```
+SECRET_KEY=[long random string]
+DJANGO_ADMIN_USER=[username]
+DJANGO_ADMIN_MAIL=[email]
+DJANGO_ADMIN_PASS=[password]
+DB_PASSWORD=[database-password]
+```
 
 2. Build the images with `docker-compose build`
 3. Run it with `docker-compose up -d`
@@ -22,9 +23,11 @@ The easiest way to run it is using docker-compose.
 ### Normal
 
 1. Build the frontend
-- `cd frontend`
-- `yarn/npm install`
-- `yarn/npm build`
+```
+cd frontend
+yarn/npm install
+yarn/npm build
+```
 
 2. Install backend requirements from the pipfile using your python package manager of choice (though you should really use pipenv)
 3. Set up a database (postgresql is recommended, though myql should work)
@@ -34,3 +37,4 @@ The easiest way to run it is using docker-compose.
 
 Though I do recommend running it with docker, as it's much easier to set up and maintain.
 
+4.
