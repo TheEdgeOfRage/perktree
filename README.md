@@ -36,5 +36,3 @@ yarn/npm build
 6. Set up a web server to serve the frontend static files and proxy requests to the backend. A sample configuration can be found in nginx.conf
 
 Though I do recommend running it with docker, as it's much easier to set up and maintain.
-
-4.
