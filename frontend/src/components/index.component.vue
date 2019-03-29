@@ -1,6 +1,5 @@
 <template>
 	<v-container>
-		<h1>Welcome to Perktree</h1>
 	</v-container>
 </template>
 
@@ -15,6 +14,9 @@ export default {
 		};
 	},
 	methods: {
+	},
+	mounted() {
+		this.$router.push({ name: 'trees' });
 	},
 };
 </script>
