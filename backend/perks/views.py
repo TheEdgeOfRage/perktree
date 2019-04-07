@@ -15,7 +15,7 @@ from rest_framework.views import APIView
 from .models import Perk, Tree, User
 from .parser import PerkParser
 from .permissions import IsPostOrIsAuthenticated, IsGetOrIsSuperuser
-from .serializers import PerkSerializer, TreeSerializer, UserSerializer
+from .serializers import PerkSerializer, TreeSerializer, UserSerializer, UserPerksSerializer
 
 
 PERKS_DIR = environ.get('PERKS_DIR')
@@ -99,7 +99,10 @@ class UserView(APIView):
 			return Response(status=404)
 
 		user = User.objects.get(base_user__id=request.user.id)
-		serialized_user = UserSerializer(user).data
+		if request.GET.get('full', False):
+			serialized_user = UserPerksSerializer(user).data
+		else:
+			serialized_user = UserSerializer(user).data
 
 		return Response(serialized_user)
 

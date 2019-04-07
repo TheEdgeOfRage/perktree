@@ -50,6 +50,7 @@ const configureRaven = () => {
 
 configureHttp();
 configureRaven();
+AuthController.setupToken();
 
 new Vue({
 	router,

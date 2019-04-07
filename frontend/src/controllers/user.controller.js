@@ -12,6 +12,10 @@ export default class AuthController {
 		return UserApi.getUser();
 	}
 
+	static getUserPerks() {
+		return UserApi.getUserPerks();
+	}
+
 	static createUser(data) {
 		return UserApi.createUser(data);
 	}

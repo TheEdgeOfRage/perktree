@@ -53,10 +53,11 @@ class UserSerializer(serializers.Serializer):
 		fields = ('id', 'perks', 'base_user')
 
 
-#  class AuthorSerializer(serializers.ModelSerializer):
-#  book_list = BookSerializer(many=True, read_only=True)
+class UserPerksSerializer(serializers.Serializer):
+	id = serializers.IntegerField(read_only=True)
+	perks = PerkSerializer(read_only=True, many=True)
 
-	#  class Meta:
-	#  model = Author
-	#  fields = ('id', 'name', 'last_name', 'book_list')
+	class Meta:
+		model = User
+		fields = ('id', 'perks')
 

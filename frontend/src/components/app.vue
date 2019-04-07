@@ -37,6 +37,7 @@ export default {
 				true: [
 					{ icon: 'fas fa-upload', text: 'Upload perks', to: { name: 'upload-perks' } },
 					{ icon: 'fas fa-code-branch', text: 'Perk trees', to: { name: 'trees' } },
+					{ icon: 'fas fa-user', text: 'User', to: { name: 'user' } },
 					{ icon: 'fas fa-sign-out-alt', text: 'Logout', to: { name: 'logout' } },
 				],
 				false: [
