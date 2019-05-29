@@ -19,8 +19,7 @@ services:
     restart: unless-stopped
     ports:
       - ::1:8019:80
-      - 127.0.0.1:8019:80
-    links:
+    depends_on:
       - backend
 
   backend:
@@ -44,6 +43,6 @@ services:
       DB_HOST: db
       DB_PORT: 5432
       PERKS_DIR: /app/static/perks
-    links:
+    depends_on:
       - db
 
