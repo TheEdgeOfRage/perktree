@@ -10,7 +10,8 @@
   "dependencies": {
     "axios": "^0.19.0",
     "d3.chart.sankey": "^0.4.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
+    "lodash.defaultsdeep": "^4.6.1",
     "material-design-icons-iconfont": "^3.0.3",
     "raven-js": "^3.27.0",
     "roboto-fontface": "*",
