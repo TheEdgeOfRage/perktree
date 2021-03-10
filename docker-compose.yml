@@ -2,31 +2,28 @@ version: "3"
 services:
   db:
     image: postgres:alpine
-    container_name: perktree-db
     restart: unless-stopped
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: perktree
     volumes:
-      - /mnt/perktree/db:/var/lib/postgresql/data
+      - db:/var/lib/postgresql/data
 
   frontend:
+    image: perktree-frontend
     build:
       context: .
       dockerfile: Dockerfile-frontend
-    container_name: perktree-frontend
     restart: unless-stopped
     ports:
-      - ::1:8019:80
-    depends_on:
-      - backend
+      - "127.0.0.1:8019:80"
 
   backend:
+    image: perktree-backend
     build:
       context: .
       dockerfile: Dockerfile-backend
-    container_name: perktree-backend
     restart: unless-stopped
     environment:
       SECRET_KEY: ${SECRET_KEY}
@@ -43,6 +40,6 @@ services:
       DB_HOST: db
       DB_PORT: 5432
       PERKS_DIR: /app/static/perks
-    depends_on:
-      - db
 
+volumes:
+  db:
