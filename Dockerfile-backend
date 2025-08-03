@@ -20,4 +20,3 @@ RUN set -ex \
 	&& rm -f db.sqlite3
 
 CMD ["./entrypoint.sh"]
-

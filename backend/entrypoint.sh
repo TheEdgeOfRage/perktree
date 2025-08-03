@@ -6,7 +6,6 @@
 # Distributed under terms of the BSD-3-Clause license.
 #
 
-sleep 5
 python manage.py migrate
 
 echo "
@@ -16,5 +15,4 @@ if not AuthUser.objects.filter(username='${DJANGO_ADMIN_USER}').count() :
 	AuthUser.objects.create_superuser('${DJANGO_ADMIN_USER}', '${DJANGO_ADMIN_MAIL}', '${DJANGO_ADMIN_PASS}')
 " | python manage.py shell
 
-gunicorn -w 4 --bind 0.0.0.0:80 perktree.wsgi:application
-
+exec gunicorn -w 4 --bind 0.0.0.0:80 perktree.wsgi:application

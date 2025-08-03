@@ -1,12 +1,13 @@
-version: "3"
 services:
   db:
-    image: postgres:alpine
+    image: postgres
     restart: unless-stopped
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: perktree
+    ports:
+      - 5432:5432
     volumes:
       - db:/var/lib/postgresql/data
 
